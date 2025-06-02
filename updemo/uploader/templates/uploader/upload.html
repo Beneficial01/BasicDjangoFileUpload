@@ -1,0 +1,16 @@
+<!doctype html>
+<title>Sample File Upload</title>
+<h1>Upload Measurement File</h1>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  Sample ID: {{ form.sample_id }}<br>
+  File: {{ form.file }}<br><br>
+  <button type="submit">Upload</button>
+</form>
+
+<h2>Recent uploads:</h2>
+<ul>
+  {% for f in files %}
+    <li>{{ f.sample_id }} — <a href="{{ f.file.url }}">{{ f.file.name|cut:'sample_uploads/' }}</a> ({{ f.uploaded_at }})</li>
+  {% endfor %}
+</ul>
